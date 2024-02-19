@@ -90,8 +90,14 @@ void loop(){
     get_samples_2 = Samples + acs_value_2; // Add samples together 2
     get_samples_3 = Samples + acs_value_3; // Add samples together 3
 
-    delay(3);
+    delay(3); // let ADC settle before next sample 3ms
   }
+
+//((AvgAcs * (5.0 / 1024.0)) is converitng the read voltage in 0-5 volts
+//2.5 is offset(I assumed that arduino is working on 5v so the viout at no current comes
+//out to be 2.5 which is out offset. If your arduino is working on different voltage than 
+//you must change the offset according to the input voltage)
+//0.100v(100mV) is rise in output voltage when 1A current flows at input
 
   avg_acs_1 = get_samples_1/150.0; // Getting the avg samples
   avg_acs_2 = get_samples_2/150.0;
