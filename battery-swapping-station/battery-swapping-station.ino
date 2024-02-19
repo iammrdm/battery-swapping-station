@@ -6,8 +6,12 @@
 // Define analog input of Current Sensor
  
 // Floats for ADC voltage & Input voltage
-float adc_voltage = 0.0;
-float in_voltage = 0.0;
+float adc_voltage_1 = 0.0;
+float adc_voltage_2 = 0.0;
+float adc_voltage_3 = 0.0;
+float in_voltage_1 = 0.0;
+float in_voltage_2 = 0.0;
+float in_voltage_3 = 0.0;
  
 // Floats for resistor values in divider (in ohms)
 float R1 = 30000.0;
@@ -48,7 +52,7 @@ void loop(){
 
   Serial.print("Input Voltage 2 = ");
   Serial.println(in_voltage_2, 2);
-  
+
   Serial.print("Input Voltage 3 = ");
   Serial.println(in_voltage_3, 2);
   
