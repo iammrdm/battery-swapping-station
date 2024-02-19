@@ -93,7 +93,7 @@ void loop(){
     delay(3); // let ADC settle before next sample 3ms
   }
 
-//((AvgAcs * (5.0 / 1024.0)) is converitng the read voltage in 0-5 volts
+//((avg_acs_1 * (5.0 / 1024.0)) is converitng the read voltage in 0-5 volts
 //2.5 is offset(I assumed that arduino is working on 5v so the viout at no current comes
 //out to be 2.5 which is out offset. If your arduino is working on different voltage than 
 //you must change the offset according to the input voltage)
