@@ -56,6 +56,6 @@ void loop(){
   Serial.print("Input Voltage 3 = ");
   Serial.println(in_voltage_3, 2);
   
-  // Short delay
-  delay(500);
+  // Short delay update it to your liking
+  delay(1500);
 }
