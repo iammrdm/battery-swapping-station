@@ -1,3 +1,6 @@
+
+#include <LiquidCrystal_I2C.h>
+#include  <Wire.h>
 // Define analog input of Voltage Sensor
 #define VOLTAGE_SENSOR_1 A0 
 #define VOLTAGE_SENSOR_2 A1
@@ -8,7 +11,8 @@
 #define CURRENT_SENSOR_2 A4
 #define CURRENT_SENSOR_3 A5
 
-// Define float for current sensor
+// LiquidCrystal
+LiquidCrystal_I2C lcd(0x27,  16, 2);
 
  
 // Floats for ADC voltage & Input voltage
@@ -55,9 +59,12 @@ float Samples = 0.0;
 float AvgAcs = 0.0;
 float AcsValueF = 0.0;
 
+
 void setup(){
   // Setup Serial Monitor
   Serial.begin(9600);
+  lcd.init();
+  lcd.backlight();
 }
  
 void loop(){
@@ -126,5 +133,9 @@ void loop(){
   Serial.println(in_voltage_3, 2);
 
   // Short delay update it to your liking
+  lcd.setCursor(0, 0);
+  lcd.print("Input Voltage 1 = ");
+  lcd.setCursor(0,1);
+  lcd.print(in_voltage_1, 2);
   delay(1500);
 }
