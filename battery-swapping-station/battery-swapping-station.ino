@@ -1,6 +1,17 @@
 
 #include <LiquidCrystal_I2C.h>
 #include  <Wire.h>
+
+// Button
+int switchPin =2; //button is connected to digital pin 2
+static int hits = 0;
+
+// variable to hold the value of the switchPin
+ int switchState = 0;
+
+// variable to hold previous value of the switchpin
+int prevSwitchState = 0;
+
 // Define analog input of Voltage Sensor
 #define VOLTAGE_SENSOR_1 A0 
 #define VOLTAGE_SENSOR_2 A1
@@ -8,8 +19,8 @@
 
 // Define analog input of Current Sensor
 #define CURRENT_SENSOR_1 A3
-#define CURRENT_SENSOR_2 A4
-#define CURRENT_SENSOR_3 A5
+// #define CURRENT_SENSOR_2 A4
+// #define CURRENT_SENSOR_3 A5
 
 // LiquidCrystal
 LiquidCrystal_I2C lcd(0x27,  16, 2);
@@ -65,6 +76,8 @@ void setup(){
   Serial.begin(9600);
   lcd.init();
   lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("Battery Monitor"); 
 }
  
 void loop(){
@@ -85,8 +98,8 @@ void loop(){
 
   // Current sensors
   acs_value_1 = analogRead(CURRENT_SENSOR_1);
-  acs_value_2 = analogRead(CURRENT_SENSOR_2);
-  acs_value_3 = analogRead(CURRENT_SENSOR_3);
+  // acs_value_2 = analogRead(CURRENT_SENSOR_2);
+  // acs_value_3 = analogRead(CURRENT_SENSOR_3);
 
   for(int x = 0; x < 150; x++) { // Get 150 samples test
     acs_value_1 = acs_value_1; // Read current sensor value on 1
@@ -114,28 +127,81 @@ void loop(){
   acs_value_f_2 = (2.5 - (avg_acs_2 * (5.0/1024.0)))/0.100;
   acs_value_f_3 = (2.5 - (avg_acs_3 * (5.0/1024.0)))/0.100;
 
-  // Current print values
-  Serial.print("Current 1 = ");
-  Serial.println(acs_value_f_1, 2);
-  Serial.print("Current 2 = ");
-  Serial.println(acs_value_f_2, 2);
-  Serial.print("Current 3 = ");
-  Serial.println(acs_value_f_3, 2);
+  // For Button
+  switchState = digitalRead(switchPin);
+   Serial.print("switchState:");Serial.println(switchState);
+  if (switchState != prevSwitchState) {
+    if (switchState == HIGH) {
+          hits = hits + 1;
+          delay(10);
+    }
+  }
   
+  
+  Serial.print("hits:");Serial.println(hits);
+  if(hits==1)
+  {
+    // Current print values
   // Print results to Serial Monitor to 2 decimal places for Voltage
-  Serial.print("Input Voltage 1 = ");
-  Serial.println(in_voltage_1, 2);
-
-  Serial.print("Input Voltage 2 = ");
-  Serial.println(in_voltage_2, 2);
-
-  Serial.print("Input Voltage 3 = ");
-  Serial.println(in_voltage_3, 2);
+    Serial.print("Input Voltage 1 = ");
+    Serial.println(in_voltage_1, 2);
+    Serial.print("Current 1 = ");
+    Serial.println(acs_value_f_1, 2);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("V1 =");
+    lcd.setCursor(3,0);
+    lcd.print(in_voltage_1, 2);
+    lcd.setCursor(0, 1);
+    lcd.print("I1=");
+    lcd.setCursor(3,1);
+    lcd.print(acs_value_f_1, 2);
+  }
+  else if(hits==2)
+  {
+    // Current print values
+  // Print results to Serial Monitor to 2 decimal places for Voltage
+    Serial.print("Input Voltage 2 = ");
+    Serial.println(in_voltage_2, 2);
+    Serial.print("Current 2 = ");
+    Serial.println(acs_value_f_2, 2);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("V2 =");
+    lcd.setCursor(3,0);
+    lcd.print(in_voltage_2, 2);
+    lcd.setCursor(0, 1);
+    lcd.print("I2=");
+    lcd.setCursor(3,1);
+    lcd.print(acs_value_f_2, 2);
+  }
+  else if ( hits==3)
+  {
+    // Current print values
+  // Print results to Serial Monitor to 2 decimal places for Voltage
+    Serial.print("Input Voltage 3 = ");
+    Serial.println(in_voltage_3, 2);
+    Serial.print("Current 3 = ");
+    Serial.println(acs_value_f_3, 2);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("V3 =");
+    lcd.setCursor(3,0);
+    lcd.print(in_voltage_3, 2);
+    lcd.setCursor(0, 1);
+    lcd.print("I3=");
+    lcd.setCursor(3,1);
+    lcd.print(acs_value_f_3, 2);
+  }
+  else if ( hits>=4)
+  {
+    lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Battery Monitor"); 
+       hits = 0;
+  }
+  Serial.println("...............");  
 
   // Short delay update it to your liking
-  lcd.setCursor(0, 0);
-  lcd.print("Input Voltage 1 = ");
-  lcd.setCursor(0,1);
-  lcd.print(in_voltage_1, 2);
-  delay(1500);
+  delay(300);
 }
