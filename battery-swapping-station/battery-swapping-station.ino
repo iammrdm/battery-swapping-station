@@ -156,6 +156,56 @@ void loop(){
     lcd.print("I1=");
     lcd.setCursor(11,0);
     lcd.print(acs_value_f_1, 2);
+    lcd.setCursor(0,1);
+    lcd.print("Battery: ");
+    // if (in_voltage_1 )
+    if (in_voltage_1 <= 10.5) {
+      Serial.print("Battery: 0%");
+      lcd.setCursor(8,1);
+      lcd.print("0%");
+    } else if (in_voltage_1 >= 10.5 && in_voltage_1 <= 11.31) {
+      Serial.print("10%");
+      lcd.setCursor(8,1);
+      lcd.print("10%");
+    } else if (in_voltage_1 >= 11.32 && in_voltage_1 <= 11.58) {
+      Serial.print("20%");
+      lcd.setCursor(8,1);
+      lcd.print("20%");
+    } else if (in_voltage_1 >= 11.59 && in_voltage_1 <= 11.74) {
+      Serial.print("30%");
+      lcd.setCursor(8,1);
+      lcd.print("30%");
+    } else if (in_voltage_1 >= 11.75 && in_voltage_1 <= 11.89) {
+      Serial.print("40%");
+      lcd.setCursor(8,1);
+      lcd.print("40%");
+    } else if (in_voltage_1 >= 11.90 && in_voltage_1 <= 12.059) {
+      Serial.print("50%");
+      lcd.setCursor(8,1);
+      lcd.print("50%");
+    } else if (in_voltage_1 >= 12.06 && in_voltage_1 <= 12.19) {
+      Serial.print("60%");
+      lcd.setCursor(8,1);
+      lcd.print("60%");
+    } else if (in_voltage_1 >= 12.20 && in_voltage_1 <= 12.31) {
+      Serial.print("70%");
+      lcd.setCursor(8,1);
+      lcd.print("70%");
+    } else if (in_voltage_1 >= 12.32 && in_voltage_1 <= 12.41) {
+      Serial.print("80%");
+      lcd.setCursor(8,1);
+      lcd.print("80%");
+    } else if (in_voltage_1 >= 12.42 && in_voltage_1 <= 12.49) {
+      Serial.print("80%");
+      lcd.setCursor(8,1);
+      lcd.print("90%");
+    } else if (in_voltage_1 >= 12.50) {
+      Serial.print("100%");
+      lcd.setCursor(8,1);
+      lcd.print("100%");
+    } else {
+      Serial.print("err");
+    }
   }
   else if(hits==2)
   {
@@ -174,6 +224,15 @@ void loop(){
     lcd.print("I2=");
     lcd.setCursor(11,0);
     lcd.print(acs_value_f_2, 2);
+    lcd.setCursor(0,1);
+    lcd.print("Battery %: ");
+    // if (in_voltage_2 <= 10.5) {
+    //   Serial.print("0%");
+    // } else if (10.5 => in_voltage_2 <= 11.31) {
+    //   Serial.print("gg1");
+    // } else {
+    //   Serial.print("gg2");
+    // }
   }
   else if ( hits==3)
   {
@@ -192,6 +251,8 @@ void loop(){
     lcd.print("I3=");
     lcd.setCursor(11,0);
     lcd.print(acs_value_f_3, 2);
+    lcd.setCursor(0,1);
+    lcd.print("Battery %: ");
   }
   else if ( hits>=4)
   {
