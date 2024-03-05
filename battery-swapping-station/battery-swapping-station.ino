@@ -149,12 +149,12 @@ void loop(){
     Serial.println(acs_value_f_1, 2);
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("V1 =");
+    lcd.print("V1=");
     lcd.setCursor(3,0);
     lcd.print(in_voltage_1, 2);
-    lcd.setCursor(0, 1);
+    lcd.setCursor(8, 0);
     lcd.print("I1=");
-    lcd.setCursor(3,1);
+    lcd.setCursor(11,0);
     lcd.print(acs_value_f_1, 2);
   }
   else if(hits==2)
@@ -167,12 +167,12 @@ void loop(){
     Serial.println(acs_value_f_2, 2);
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("V2 =");
+    lcd.print("V2=");
     lcd.setCursor(3,0);
     lcd.print(in_voltage_2, 2);
-    lcd.setCursor(0, 1);
+    lcd.setCursor(8, 0);
     lcd.print("I2=");
-    lcd.setCursor(3,1);
+    lcd.setCursor(11,0);
     lcd.print(acs_value_f_2, 2);
   }
   else if ( hits==3)
@@ -185,12 +185,12 @@ void loop(){
     Serial.println(acs_value_f_3, 2);
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("V3 =");
+    lcd.print("V3=");
     lcd.setCursor(3,0);
     lcd.print(in_voltage_3, 2);
-    lcd.setCursor(0, 1);
+    lcd.setCursor(8, 0);
     lcd.print("I3=");
-    lcd.setCursor(3,1);
+    lcd.setCursor(11,0);
     lcd.print(acs_value_f_3, 2);
   }
   else if ( hits>=4)
