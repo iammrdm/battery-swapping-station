@@ -22,6 +22,18 @@ int prevSwitchState = 0;
 // #define CURRENT_SENSOR_2 A4
 // #define CURRENT_SENSOR_3 A5
 
+// LED Indicator
+const int LED_BATTERY_RED_1 = 3;
+const int LED_BATTERY_YELLOW_1 = 4;
+const int LED_BATTERY_GREEN_1 = 5;
+const int LED_BATTERY_RED_2 = 6;
+const int LED_BATTERY_YELLOW_2 = 7;
+const int LED_BATTERY_GREEN_2 = 8;
+const int LED_BATTERY_RED_3 = 9;
+const int LED_BATTERY_YELLOW_3 = 10;
+const int LED_BATTERY_GREEN_3 = 11;
+
+
 // LiquidCrystal
 LiquidCrystal_I2C lcd(0x27,  16, 2);
 
@@ -163,46 +175,90 @@ void loop(){
       Serial.print("Battery: 0%");
       lcd.setCursor(8,1);
       lcd.print("0%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, HIGH);  
+        digitalWrite(LED_BATTERY_YELLOW_1, LOW);   
+        digitalWrite(LED_BATTERY_GREEN_1, LOW); 
     } else if (in_voltage_1 >= 10.5 && in_voltage_1 <= 11.31) {
       Serial.print("10%");
       lcd.setCursor(8,1);
       lcd.print("10%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, HIGH);   
+        digitalWrite(LED_BATTERY_GREEN_1, LOW); 
     } else if (in_voltage_1 >= 11.32 && in_voltage_1 <= 11.58) {
       Serial.print("20%");
       lcd.setCursor(8,1);
       lcd.print("20%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, HIGH);   
+        digitalWrite(LED_BATTERY_GREEN_1, LOW); 
     } else if (in_voltage_1 >= 11.59 && in_voltage_1 <= 11.74) {
       Serial.print("30%");
       lcd.setCursor(8,1);
       lcd.print("30%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, HIGH);   
+        digitalWrite(LED_BATTERY_GREEN_1, LOW); 
     } else if (in_voltage_1 >= 11.75 && in_voltage_1 <= 11.89) {
       Serial.print("40%");
       lcd.setCursor(8,1);
       lcd.print("40%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, HIGH);   
+        digitalWrite(LED_BATTERY_GREEN_1, LOW); 
     } else if (in_voltage_1 >= 11.90 && in_voltage_1 <= 12.059) {
       Serial.print("50%");
       lcd.setCursor(8,1);
       lcd.print("50%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, HIGH);   
+        digitalWrite(LED_BATTERY_GREEN_1, LOW); 
     } else if (in_voltage_1 >= 12.06 && in_voltage_1 <= 12.19) {
       Serial.print("60%");
       lcd.setCursor(8,1);
       lcd.print("60%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, HIGH);   
+        digitalWrite(LED_BATTERY_GREEN_1, LOW); 
     } else if (in_voltage_1 >= 12.20 && in_voltage_1 <= 12.31) {
       Serial.print("70%");
       lcd.setCursor(8,1);
       lcd.print("70%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, HIGH);   
+        digitalWrite(LED_BATTERY_GREEN_1, LOW); 
     } else if (in_voltage_1 >= 12.32 && in_voltage_1 <= 12.41) {
       Serial.print("80%");
       lcd.setCursor(8,1);
       lcd.print("80%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, HIGH);   
+        digitalWrite(LED_BATTERY_GREEN_1, LOW); 
     } else if (in_voltage_1 >= 12.42 && in_voltage_1 <= 12.49) {
       Serial.print("80%");
       lcd.setCursor(8,1);
       lcd.print("90%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, LOW);   
+        digitalWrite(LED_BATTERY_GREEN_1, HIGH); 
     } else if (in_voltage_1 >= 12.50) {
       Serial.print("100%");
       lcd.setCursor(8,1);
       lcd.print("100%");
+      // LED Codes
+        digitalWrite(LED_BATTERY_RED_1, LOW);  
+        digitalWrite(LED_BATTERY_YELLOW_1, LOW);   
+        digitalWrite(LED_BATTERY_GREEN_1, HIGH); 
     } else {
       Serial.print("err");
     }
