@@ -1,6 +1,7 @@
 
 #include <LiquidCrystal_I2C.h>
 #include  <Wire.h>
+#include <Servo.h>
 
 // Button
 int switchPin =2; //button is connected to digital pin 2
@@ -82,9 +83,18 @@ float Samples = 0.0;
 float AvgAcs = 0.0;
 float AcsValueF = 0.0;
 
+// Servo 
+int ServoPos = 0; // Default Servo position, Meaning door is closed
+Servo ServoBattery1;
+Servo ServoBattery2;
+Servo ServoBattery3;
+
 
 void setup(){
   // Setup Serial Monitor
+  ServoBattery1.attach(12); // Servo pin on 12
+  ServoBattery2.attach(13); // Servo pin on 13
+  ServoBattery3.attach(14); // Servo pin on 14
   Serial.begin(9600);
   lcd.init();
   lcd.backlight();
@@ -171,7 +181,14 @@ void loop(){
     lcd.setCursor(0,1);
     lcd.print("Battery: ");
     // if (in_voltage_1 )
-    if (in_voltage_1 <= 10.5) {
+    if (in_voltage_1 <= 10.5) { 
+      // Servo Door will close at 0% battery
+      if ( in_voltage_1 <= 12.42 ) {
+        ServoBattery1.write(ServoPos);  
+      } else {
+        ServoBattery1.write(180);              // tell servo to go to position in variable 'ServoPos', calibrate this
+        delay(15);                       // waits 15 ms for the servo to reach the position
+      }
       Serial.print("Battery: 0%");
       lcd.setCursor(8,1);
       lcd.print("0%");
@@ -259,6 +276,13 @@ void loop(){
         digitalWrite(LED_BATTERY_RED_1, LOW);  
         digitalWrite(LED_BATTERY_YELLOW_1, LOW);   
         digitalWrite(LED_BATTERY_GREEN_1, HIGH); 
+      // Servo Codes try it first, if battery is 100% it will automatically open
+      for (ServoPos = 0; ServoPos <= 180; ServoPos += 1) { // goes from 0 degrees to 180 degrees
+      // in steps of 1 degree
+        Serial.print("Battery Full");
+        ServoBattery1.write(ServoPos);              // tell servo to go to position in variable 'pos'
+        delay(15);                       // waits 15 ms for the servo to reach the position
+      }
     } else {
       Serial.print("err");
     }
